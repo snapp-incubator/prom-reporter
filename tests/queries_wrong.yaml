@@ -1,0 +1,10 @@
+spec:
+  - name: Stream Publish Rate
+    legend: stream_name
+    query: rate(nats_stream_last_seq{stream_name="rides", namespace="nats-production"}[5m])
+
+  - name: Golchin Consuming Rate
+    operation: lastValue
+    query: sum(rate(nats_consumer_delivered_consumer_seq{consumer_name=~".*golchin.*ride-started.*", namespace="nats-production"}[5m])) by (consumer_name)
+
+
