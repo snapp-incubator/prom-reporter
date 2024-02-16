@@ -18,20 +18,12 @@ class ConfigHandler:
 
     def config_parser(self):
         # Initialize an empty list to hold the queries
-        queries_list = []
         # Read the YAML file
         yaml_content = self._load_yaml(self._config_path)
         if not self.validate_yaml_with_schema(yaml_content, config_schema):
             logger.error("Schema is not vald")
             raise
-        # Iterate through each spec item
-        for item in yaml_content["spec"]:
-            # Check if 'legend' is not specified and set it to an empty string if so
-            if "legend" not in item:
-                item["legend"] = ""
-            # Append the modified item to the queries_list
-            queries_list.append(item)
-        return queries_list
+        return yaml_content
 
     @staticmethod
     def validate_yaml_with_schema(yaml_data, schema_data):

@@ -1,0 +1,14 @@
+spec:
+  prometheus:
+    url: ""
+  queries:
+  - name: Node Load Average
+    legend: instance
+    operation: lastValue
+    query: node:load_average:5m{}
+
+  - name: Memory Usage
+    legend: pod
+    operation: lastValue
+    query: sum(container_memory_working_set_bytes{}) by (pod)
+

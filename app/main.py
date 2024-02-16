@@ -1,4 +1,6 @@
 from helper.config_handler import ConfigHandler
 
-config_handler = ConfigHandler()
-data = config_handler.config_parser()
+
+if __name__ == "__main__":
+    config_handler = ConfigHandler()
+    config = config_handler.config_parser()
