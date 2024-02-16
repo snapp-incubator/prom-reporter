@@ -1,11 +1,12 @@
 import yaml
 import os
 from .logger import logger
-from .config_schema import config_schema
+from .schemas import config_schema
 import schema
 
 class ConfigHandler:
     def __init__(self):
+        self.output_path = os.getenv("OUTPUT_PATH", "/tmp/result.json")
         self._config_path = os.environ["CONFIG_PATH"]
         if not os.path.exists(self._config_path):
             logger.error("Config file not found in path {}".format(self._config_path))
