@@ -13,7 +13,7 @@ class OutputHandler:
         else:
             name_column = name
         df = df[columns_to_keep]
-        df["name"] = name_column
+        df.loc[:, ["name"]] = name_column
         return df
 
     def concat_items(self, dfs: list[pd.DataFrame]):
