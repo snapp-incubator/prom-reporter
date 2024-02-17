@@ -20,9 +20,9 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
   
       - uses: docker/metadata-action@v4
-      id: meta
-      with:
-        images: ghcr.io/${{ github.repository }}
+        id: meta
+        with:
+          images: ghcr.io/${{ github.repository }}
 
       - uses: docker/build-push-action@v4
         with:
