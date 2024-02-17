@@ -2,10 +2,9 @@ from .schemas import output_schema
 import pandas as pd
 from .logger import logger
 
-class OutputHandler:
-    def __init__(self):
-        pass
 
+class OutputHandler:
+    # convert raw result to a template suited for the final json result
     def prune_metric(self, df: pd.DataFrame, name: str, legend: str) -> pd.DataFrame:
         columns_to_keep = ["timestamp", "value"]
         if legend in df.columns:
@@ -24,6 +23,9 @@ class OutputHandler:
             logger.error("output schema is not vald")
             raise
         return True
-    def save(self, df: pd.DataFrame):
-        result = df.to_json(orient='records', date_format='iso', date_unit='s')
-        return result
+
+    def save(self, df: pd.DataFrame, output_path):
+        json_str = df.to_json(
+            path=output_path, orient="records", date_format="iso", date_unit="s"
+        )
+        return json_str
