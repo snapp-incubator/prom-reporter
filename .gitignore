@@ -7,3 +7,4 @@ __pycache__
 .coverage
 .ruff_cache
 output.json
+data/

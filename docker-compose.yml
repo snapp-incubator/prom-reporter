@@ -1,0 +1,8 @@
+version: "3"
+services:
+  reporter:
+    container_name: prom_reporter
+    build: .
+    volumes:
+      - ./data:/tmp
+    command: python app/main.py -c /tmp/config.yaml -o /tmp/output.json
