@@ -26,6 +26,10 @@ class OutputHandler:
 
     def save(self, df: pd.DataFrame, output_path):
         json_str = df.to_json(
-            path=output_path, orient="records", date_format="iso", date_unit="s"
+            orient="records",
+            date_format="iso",
+            date_unit="s",
         )
+        with open(output_path, "w") as json_file:
+            json_file.write(json_str)
         return json_str

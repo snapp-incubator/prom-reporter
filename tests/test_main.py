@@ -2,11 +2,11 @@ from unittest.mock import patch, Mock
 from app.main import main
 
 @patch(
-    "app.main.PrometheusConnect.check_prometheus_connection",
+    "app.helper.prometheus.PrometheusConnect.check_prometheus_connection",
     Mock(return_value=True),
 )
 @patch(
-    "app.helper.prometheus.Prometheus.PrometheusConnect.custom_query",
+    "app.helper.prometheus.PrometheusConnect.custom_query",
     Mock(
         return_value=[
             {
@@ -17,4 +17,4 @@ from app.main import main
     ),
 )
 def test_main():
-    main(config_path="tests/config.yaml", output_path="tests/output.yaml")
+    main(config_path="tests/config.yaml", output_path="tests/output.json")
