@@ -25,6 +25,8 @@ def main(config_path: str, output_path: str):
     if not output_handler.validate(result):
         logger.error("output schema is not valid")
         raise
+    logger.info("result is saved to {}".format(config_path))
+    logger.info(result)
 
 
 if __name__ == "__main__":

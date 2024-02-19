@@ -20,7 +20,6 @@ class Prometheus:
     def get_current_value(self, query) -> pd.DataFrame:
         try:
             result = self.client.custom_query(query)
-            print(result)
         except RequestException:
             logger.error(
                 "connection error while handling query {}".format(query),
