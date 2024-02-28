@@ -6,13 +6,13 @@ from .logger import logger
 class OutputHandler:
     # convert raw result to a template suited for the final json result
     def prune_metric(self, df: pd.DataFrame, name: str, legend: str) -> pd.DataFrame:
-        columns_to_keep = ["timestamp", "value"]
         if legend in df.columns:
-            name_column = name + ": " + df.loc[0, legend]
+            df["name"] = df[legend].apply(lambda x: f"{name}: {x}")
         else:
-            name_column = name
+            df["name"] = name
+
+        columns_to_keep = ["timestamp", "name", "value"]
         df = df[columns_to_keep]
-        df.loc[:, ["name"]] = name_column
         return df
 
     def concat_items(self, dfs: list[pd.DataFrame]):
