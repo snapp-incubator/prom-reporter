@@ -6,6 +6,7 @@ from prometheus_api_client import (
 from requests import RequestException
 from .logger import logger
 import pandas as pd
+import time
 
 
 class Prometheus:
@@ -29,5 +30,13 @@ class Prometheus:
             logger.error(
                 "non 200 response status code on query {}".format(query),
                 stack_info=True,
+            )
+        # handle empty results as a dummy metric with current time and none value.
+        if len(result) == 0:
+            return MetricSnapshotDataFrame(
+                data={
+                    "metric": {"__name__": "dummy_metric"},
+                    "value": [time.time(), None],
+                }
             )
         return MetricSnapshotDataFrame(result)
